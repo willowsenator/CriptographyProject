@@ -1,0 +1,11 @@
+{
+  "name": "crypto_project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:willowsenator/CriptographyProject.git",
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "yargs": "^17.7.2"
+  }
+}
