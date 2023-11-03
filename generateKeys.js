@@ -1,12 +1,12 @@
 const {createECDH} =  require("crypto");
 const args = require("yargs").argv;
 const fs = require("fs");
-
-const curveName = "secp521r1";
+const {exit} = require("process");
+const {CURVE_NAME} = require("./common_constants");
 
 if (args.name){
     console.log("Creating ECDH object...");
-    const ecdh = createECDH(curveName);
+    const ecdh = createECDH(CURVE_NAME);
 
     console.log("Creating public and private keys...");
     const publicKey = ecdh.generateKeys("hex");
@@ -18,5 +18,5 @@ if (args.name){
 
 } else {
     console.error("Use: node generateKeys.js --name <custom_name>");
-    process.exit(0);
+    exit(0);
 }
