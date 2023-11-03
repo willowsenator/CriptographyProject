@@ -10,8 +10,8 @@ if(!args.private && !args.public && !args.data){
 } else {
     const ecdh = createECDH(CURVE_NAME);
     console.log("Reading public and private keys...");
-    const privateKey = fs.readFileSync("./data/" + args.private + ".key").toString();
-    const publicKey = fs.readFileSync("./data/" + args.public + ".pb").toString();
+    const privateKey = fs.readFileSync(`./data/${args.private}.key`).toString();
+    const publicKey = fs.readFileSync(`./data/${args.public}.pb`).toString();
     ecdh.setPrivateKey(privateKey, "hex");
 
     // create secret to encrypt
@@ -20,9 +20,8 @@ if(!args.private && !args.public && !args.data){
 
     console.log("Encrypting file...");
     const cipher = createCipheriv(ENCRYPT_ALGO, secret.slice(0,32), secret.slice(0, 16));
-    const text_to_encrypt = fs.readFileSync("./data/" + args.data + ".txt");
-    let encrypted = cipher.update(text_to_encrypt, 'utf-8', 'binary');
-    encrypted += cipher.final('binary');
-    fs.writeFileSync("./data/" + args.public + "-" + args.data + ".enc", encrypted);
 
+    fs.createReadStream(`./data/${args.data}.txt`)
+    .pipe(cipher)
+    .pipe(fs.createWriteStream(`./data/${args.public}-${args.data}_stream.enc`));
 }
