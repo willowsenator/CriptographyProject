@@ -1,7 +1,7 @@
 const CURVE_NAME = "secp521r1";
-const ALGO_ENCRYPT = "aes-256-cbc";
+const ENCRYPT_ALGO = "aes-256-cbc";
 
 module.exports = {
     CURVE_NAME,
-    ALGO_ENCRYPT
+    ENCRYPT_ALGO
 };
